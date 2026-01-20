@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tableaux de conversion — Exercices</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <h1>Exercices progressifs</h1>
+        <p>
+          30 exercices : réponses élève sauvegardées automatiquement. Corrections masquées (sauf mode enseignant).
+        </p>
+
+        <div class="tabs no-print" role="tablist" aria-label="Référentiels" style="display:flex; gap:8px; flex-wrap:wrap; margin-top:10px;">
+          <div class="tab" role="tab" aria-selected="true" data-track="general">Général</div>
+          <div class="tab" role="tab" aria-selected="false" data-track="cap">CAP Électricité</div>
+          <div class="tab" role="tab" aria-selected="false" data-track="bpciel">Bac Pro CIEL</div>
+          <div class="tab" role="tab" aria-selected="false" data-track="bpmspc">Bac Pro MSPC</div>
+          <div class="tab" role="tab" aria-selected="false" data-track="bts">BTS CIEL</div>
+        </div>
+      </div>
+
+      <nav class="nav no-print">
+        <a href="index.html">Accueil</a>
+        <a href="exercices.html" aria-current="page">Exercices</a>
+        <a href="qcm.html">QCM</a>
+        <a href="fiche-a4.html">Fiche A4</a>
+        <a href="enseignant.html" class="ghost">Enseignant</a>
+      </nav>
+    </div>
+
+    <div class="card">
+      <div class="hd">
+        <h2>Consignes</h2>
+        <p>Astuce : écrire la valeur dans la bonne colonne, puis compléter avec des zéros.</p>
+      </div>
+      <div class="bd">
+        <div class="note ok">
+          <strong>Rappel</strong><br/>
+          Longueurs/Masses/Capacités : ×10 par colonne · Aires : ×100 · Volumes : ×1000 · Temps : ×60 · Données : 8 et 1024
+        </div>
+
+        <div class="toolbar no-print">
+          <div class="left">
+            <span class="chip" id="exKpi"></span>
+          </div>
+          <div class="right">
+            <button class="btn primary" id="btnPrint">Imprimer / PDF</button>
+            <button class="btn ok" id="btnEmail" onclick="EKM.sendEmailSummary()">Envoyer par email</button>
+            <button class="btn ok" id="btnExportJson">Export JSON</button>
+            <button class="btn ok" id="btnExportCsv">Export CSV</button>
+            <button class="btn warn" id="btnResetAll">Réinitialiser</button>
+          </div>
+        </div>
+
+        <hr class="sep"/>
+
+        <div id="exList"></div>
+      </div>
+    </div>
+
+    <footer>
+      <div>
+        © 2026 Eric MORMIN — Tous droits réservés · Édité par
+        <a href="https://www.ekmconseils.eu" target="_blank" rel="noopener">EKM Conseils (www.ekmconseils.eu)</a>
+      </div>
+      <div>
+        Ressource pédagogique réalisée pour La Salle Saint-Nicolas, Issy-les-Moulineaux ·
+        CAP Electricité · Bac Pro CIEL · Bac Pro MSPC · BTS CIEL
+      </div>
+    </footer>
+  </div>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tableaux de conversion — Fiche A4</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar no-print">
+      <div class="brand">
+        <h1>Fiche A4 (imprimable / PDF)</h1>
+        <p>Récapitulatif : fiche élève, dernier convertisseur, réponses exercices, score QCM.</p>
+      </div>
+
+      <nav class="nav">
+        <a href="index.html">Accueil</a>
+        <a href="exercices.html">Exercices</a>
+        <a href="qcm.html">QCM</a>
+        <a href="fiche-a4.html" aria-current="page">Fiche A4</a>
+        <a href="enseignant.html" class="ghost">Enseignant</a>
+      </nav>
+    </div>
+
+    <div class="card">
+      <div class="hd">
+        <h2>Récapitulatif (A4)</h2>
+        <p>Utilisez “Imprimer / PDF” pour enregistrer en PDF ou imprimer.</p>
+      </div>
+      <div class="bd">
+        <div class="toolbar no-print">
+          <div class="left">
+            <span class="chip">A4 optimisé</span>
+          </div>
+          <div class="right">
+            <button class="btn primary" onclick="window.print()">Imprimer / PDF</button>
+            <button class="btn ok" onclick="EKM.sendEmailSummary()">Envoyer par email</button>
+          </div>
+        </div>
+
+        <hr class="sep no-print"/>
+
+        <div id="ficheContent"></div>
+      </div>
+    </div>
+
+    <footer>
+      <div>
+        © 2026 Eric MORMIN — Tous droits réservés · Édité par
+        <a href="https://www.ekmconseils.eu" target="_blank" rel="noopener">EKM Conseils (www.ekmconseils.eu)</a>
+      </div>
+      <div>
+        Ressource pédagogique réalisée pour La Salle Saint-Nicolas, Issy-les-Moulineaux ·
+        CAP Electricité · Bac Pro CIEL · Bac Pro MSPC · BTS CIEL
+      </div>
+    </footer>
+  </div>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

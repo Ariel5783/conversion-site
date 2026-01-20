@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tableaux de conversion — Accueil</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <h1>Tableaux de conversion — site pratique</h1>
+        <p>
+          Synthèse opérationnelle et entraînement interactif (SI, électricité, numérique) pour
+          CAP Électricité, Bac Pro CIEL, Bac Pro MSPC, BTS CIEL.
+        </p>
+
+        <div class="tabs no-print" role="tablist" aria-label="Référentiels" style="display:flex; gap:8px; flex-wrap:wrap; margin-top:10px;">
+          <div class="tab" role="tab" aria-selected="true" data-track="general">Général</div>
+          <div class="tab" role="tab" aria-selected="false" data-track="cap">CAP Électricité</div>
+          <div class="tab" role="tab" aria-selected="false" data-track="bpciel">Bac Pro CIEL</div>
+          <div class="tab" role="tab" aria-selected="false" data-track="bpmspc">Bac Pro MSPC</div>
+          <div class="tab" role="tab" aria-selected="false" data-track="bts">BTS CIEL</div>
+        </div>
+      </div>
+
+      <nav class="nav no-print">
+        <a href="index.html" aria-current="page">Accueil</a>
+        <a href="exercices.html">Exercices</a>
+        <a href="qcm.html">QCM</a>
+        <a href="fiche-a4.html">Fiche A4</a>
+        <a href="enseignant.html" class="ghost">Enseignant</a>
+      </nav>
+    </div>
+
+    <div class="grid">
+      <section class="card">
+        <div class="hd">
+          <h2>Fiche élève (auto-enregistrement)</h2>
+          <p>Ces informations seront utilisées dans la fiche A4, l’email et l’export.</p>
+        </div>
+        <div class="bd">
+          <div class="row">
+            <div>
+              <label for="studentName">Nom de l’élève</label>
+              <input id="studentName" type="text" placeholder="Ex. DUPONT Alex" />
+            </div>
+            <div>
+              <label for="studentClass">Classe</label>
+              <input id="studentClass" type="text" placeholder="Ex. CAP 1 / 2de CIEL / BTS1..." />
+            </div>
+          </div>
+
+          <div class="row" style="margin-top:10px">
+            <div>
+              <label for="period">Période / Date</label>
+              <input id="period" type="text" placeholder="Ex. Janvier 2026" />
+            </div>
+            <div>
+              <label for="teacherOrGroup">Groupe / Atelier (optionnel)</label>
+              <input id="teacherOrGroup" type="text" placeholder="Ex. Demi-groupe A" />
+            </div>
+          </div>
+
+          <div style="margin-top:10px">
+            <label for="comment">Commentaire (optionnel)</label>
+            <textarea id="comment" placeholder="Observations, difficultés, méthode..."></textarea>
+          </div>
+
+          <div class="note ok" style="margin-top:12px">
+            <strong>Astuce pédagogique</strong><br/>
+            Écrire la valeur dans la bonne colonne, puis compléter avec des zéros.
+            (Aires : ×100 ; Volumes : ×1000 ; Temps : ×60)
+          </div>
+
+          <div class="note warn" style="margin-top:10px" id="trackNote"></div>
+
+          <div class="toolbar no-print">
+            <div class="left">
+              <span class="chip">Auto-enregistrement : actif</span>
+            </div>
+            <div class="right">
+              <button class="btn primary" id="btnPrint">Imprimer / PDF</button>
+              <button class="btn warn" id="btnResetAll">Réinitialiser</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="hd">
+          <h2>Convertisseur interactif (méthode par colonnes)</h2>
+          <p>Saisissez une valeur dans l’unité de départ : le tableau se remplit automatiquement.</p>
+        </div>
+        <div class="bd">
+          <div class="row">
+            <div>
+              <label for="modeSelect">Choisir un tableau</label>
+              <select id="modeSelect">
+                <option value="length">Longueurs (km → mm)</option>
+                <option value="mass">Masses (t → mg)</option>
+                <option value="capacity">Capacités (kL → mL)</option>
+                <option value="time">Temps (h → min → s)</option>
+                <option value="electric">Électricité (kV/V, A/mA, kΩ/Ω, kW/W)</option>
+                <option value="data">Informatique / Réseaux (bits, octets, Ko/Mo/Go/To)</option>
+                <option value="area">Aires (km² → mm²) — ×100</option>
+                <option value="volume3">Volumes cubiques (m³ → mm³) — ×1000</option>
+              </select>
+            </div>
+            <div>
+              <label for="precisionSelect">Arrondi (affichage)</label>
+              <select id="precisionSelect">
+                <option value="auto">Auto</option>
+                <option value="0">0 décimale</option>
+                <option value="1">1 décimale</option>
+                <option value="2">2 décimales</option>
+                <option value="3">3 décimales</option>
+                <option value="6">6 décimales</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="note" style="margin-top:12px" id="modeHelp"></div>
+
+          <div style="margin-top:12px">
+            <div class="unit-grid" id="unitGrid"></div>
+            <div class="toolbar no-print">
+              <div class="left">
+                <span class="small" id="boardStatus"></span>
+              </div>
+              <div class="right">
+                <button class="btn" id="btnClearBoard">Effacer</button>
+                <button class="btn primary" id="btnExample">Exemple</button>
+              </div>
+            </div>
+          </div>
+
+          <hr class="sep"/>
+
+          <div class="note">
+            <strong>Objectif pédagogique</strong><br/>
+            Consolider les prérequis de conversion indispensables en sciences et en enseignements professionnels
+            (mesures, quantités, schémas, câblage, consommation, temps d’intervention, données numériques).
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <div>
+        © 2026 Eric MORMIN — Tous droits réservés · Édité par
+        <a href="https://www.ekmconseils.eu" target="_blank" rel="noopener">EKM Conseils (www.ekmconseils.eu)</a>
+      </div>
+      <div>
+        Ressource pédagogique réalisée pour La Salle Saint-Nicolas, Issy-les-Moulineaux ·
+        CAP Electricité · Bac Pro CIEL · Bac Pro MSPC · BTS CIEL
+      </div>
+    </footer>
+  </div>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>
