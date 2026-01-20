@@ -3,17 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Tableaux de conversion — QCM</title>
+
+  <title>Conversions &amp; Mesures — QCM (CAP · Bac Pro · BTS)</title>
+  <meta name="description" content="QCM interactif de conversion (SI, électricité, numérique) : 20 questions, score, corrections, sauvegarde automatique et exports JSON/CSV. Ressource CAP Électricité, Bac Pro CIEL, Bac Pro MSPC, BTS CIEL.">
+
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body>
   <div class="wrap">
     <div class="topbar">
       <div class="brand">
-        <h1>QCM interactif</h1>
-        <p>
-          20 questions : score, correction, sauvegarde automatique. Export JSON/CSV disponible.
-        </p>
+        <h1>Conversions &amp; Mesures</h1>
+        <p>QCM interactif – CAP · Bac Pro · BTS</p>
 
         <div class="tabs no-print" role="tablist" aria-label="Référentiels" style="display:flex; gap:8px; flex-wrap:wrap; margin-top:10px;">
           <div class="tab" role="tab" aria-selected="true" data-track="general">Général</div>
@@ -32,6 +33,32 @@
         <a href="enseignant.html" class="ghost">Enseignant</a>
       </nav>
     </div>
+
+    <!-- Bloc d'introduction (page QCM) -->
+    <section class="card" id="qcm-intro" style="margin-bottom:14px;">
+      <div class="hd">
+        <h2>QCM interactif</h2>
+        <p>20 questions : score, correction, sauvegarde automatique. Export JSON/CSV disponible.</p>
+      </div>
+      <div class="bd">
+        <p>
+          Objectif : vérifier la maîtrise des conversions indispensables (SI, temps, électricité, numérique) et la capacité
+          à choisir la bonne opération (×10, ×100, ×1000, ×60, 8 et 1024).
+        </p>
+
+        <div class="note ok" style="margin-top:12px">
+          <strong>Rappel méthode</strong><br/>
+          Écrire la valeur dans la bonne colonne, puis compléter avec des zéros.<br/>
+          Longueurs / Masses / Capacités : ×10 · Aires : ×100 · Volumes : ×1000 · Temps : ×60 · Données : 8 et 1024
+        </div>
+
+        <div class="note warn" style="margin-top:10px">
+          <strong>Mode enseignant</strong><br/>
+          Pour afficher les corrigés automatiquement : ajoutez <code>?teacher=1</code> à l’adresse
+          (ou <code>&amp;teacher=1</code> si l’adresse contient déjà un <code>?</code>).
+        </div>
+      </div>
+    </section>
 
     <div class="card">
       <div class="hd">
@@ -68,7 +95,7 @@
       </div>
       <div>
         Ressource pédagogique réalisée pour La Salle Saint-Nicolas, Issy-les-Moulineaux ·
-        CAP Electricité · Bac Pro CIEL · Bac Pro MSPC · BTS CIEL
+        CAP Électricité · Bac Pro CIEL · Bac Pro MSPC · BTS CIEL
       </div>
     </footer>
   </div>
