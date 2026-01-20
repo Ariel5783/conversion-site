@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>Conversions &amp; Mesures — Fiches papier A4</title>
+  <meta name="description" content="Fiches papier A4 imprimables : tableaux de conversion vierges + exercices progressifs à faire à la main (SI, temps, électricité, numérique). Corrigés masqués, mode enseignant via ?teacher=1.">
+
+  <link rel="stylesheet" href="assets/styles.css" />
+
+  <style>
+    /* Impression A4 propre */
+    @page { size: A4; margin: 12mm; }
+    .print-only { display: none; }
+    .paper { max-width: 900px; margin: 0 auto; }
+    .paper h1 { margin: 0; }
+    .paper .subtitle { margin-top: 6px; }
+    .paper .meta { font-size: 12px; opacity: .85; margin-top: 4px; }
+    .sheet-title { margin-top: 14px; }
+    .method { margin-top: 10px; }
+    .blank-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    .blank-table th, .blank-table td { border: 1px solid rgba(0,0,0,.25); padding: 8px; text-align: center; }
+    .blank-table td { height: 32px; }
+    .ex-list { margin-top: 10px; }
+    .ex-item { margin: 8px 0; }
+    .lines { border: 1px solid rgba(0,0,0,.20); border-radius: 8px; padding: 10px; margin-top: 12px; }
+    .line { border-bottom: 1px dashed rgba(0,0,0,.25); height: 18px; }
+    .line:last-child { border-bottom: none; }
+    .corr { display: none; margin-top: 12px; }
+    .corr pre { white-space: pre-wrap; margin: 0; }
+    .smallnote { font-size: 12px; opacity: .85; }
+    @media print {
+      .no-print { display: none !important; }
+      .print-only { display: block; }
+      .wrap { padding: 0; }
+      .card { box-shadow: none !important; }
+      .blank-table th, .blank-table td { border: 1px solid #000; }
+      body { background: #fff !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap paper">
+
+    <div class="topbar no-print">
+      <div class="brand">
+        <h1>Conversions &amp; Mesures</h1>
+        <p class="subtitle">Fiches papier A4 – tableaux vierges + exercices (CAP · Bac Pro · BTS)</p>
+        <p class="meta">
+          Astuce : écrire la valeur dans la bonne colonne, puis compléter avec des zéros.
+          (Aires : ×100 ; Volumes : ×1000 ; Temps : ×60 ; Données : 8 et 1024)
+        </p>
+      </div>
+
+      <nav class="nav">
+        <a href="index.html">Accueil</a>
+        <a href="exercices.html">Exercices</a>
+        <a href="qcm.html">QCM</a>
+        <a href="fiche-a4.html">Fiche A4</a>
+        <a href="enseignant.html" class="ghost">Enseignant</a>
+      </nav>
+    </div>
+
+    <!-- Choix rapide (écran uniquement) -->
+    <section class="card no-print">
+      <div class="hd">
+        <h2>Choisir une fiche papier</h2>
+        <p>Ouvrez une fiche, puis utilisez “Imprimer / PDF”. Corrigés : ajoutez <b>&amp;teacher=1</b>.</p>
+      </div>
+      <div class="bd">
+        <div class="row" style="gap:10px; align-items:flex-end;">
+          <div style="flex:1;">
+            <label for="typeSelect">Type de fiche</label>
+            <select id="typeSelect">
+              <option value="length">Longueurs (km → mm)</option>
+              <option value="mass">Masses (t → mg)</option>
+              <option value="capacity">Capacités (kL → mL)</option>
+              <option value="time">Temps (h → min → s)</option>
+              <option value="area">Aires (km² → mm²) — ×100</option>
+              <option value="volume3">Volumes cubiques (m³ → mm³) — ×1000</option>
+              <option value="electric">Électricité (kV/V, A/mA, kΩ/Ω, kW/W)</option>
+              <option value="data">Numérique / Réseaux (bits, octets, Ko/Mo/Go/To)</option>
+            </select>
+          </div>
+          <div style="width:240px;">
+            <button class="btn primary" id="btnOpen">Ouvrir la fiche</button>
+          </div>
+          <div style="width:240px;">
+            <button class="btn" onclick="window.print()">Imprimer / PDF</button>
+          </div>
+        </div>
+
+        <div class="note warn" style="margin-top:12px;">
+          <strong>Mode enseignant</strong><br/>
+          Pour afficher le corrigé : ajoutez <code>teacher=1</code> à l’URL.
+          Exemple : <code>fiches-papier-a4.html?type=length&amp;teacher=1</code>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fiche A4 (imprimable) -->
+    <section class="card" id="sheet">
+      <div class="hd">
+        <h2 class="sheet-title" id="sheetTitle">Fiche papier A4</h2>
+        <p class="smallnote" id="sheetSub"></p>
+      </div>
+
+      <div class="bd">
+        <div class="note ok method">
+          <strong>Méthode</strong><br/>
+          Écrire la valeur dans la bonne colonne, puis compléter avec des zéros.
+          <span id="sheetRule"></span>
+        </div>
+
+        <table class="blank-table" id="blankTable" aria-label="Tableau de conversion vierge"></table>
+
+        <div class="note" style="margin-top:12px;">
+          <strong>Exercices (à faire à la main)</strong><br/>
+          Écrivez vos étapes et vos conversions sur les lignes prévues. Vérifiez le bon facteur (×10 / ×100 / ×1000 / ×60 / 8 / 1024).
+        </div>
+
+        <div class="ex-list" id="exList"></div>
+
+        <div class="note" style="margin-top:12px;">
+          <strong>Brouillon / Calculs</strong>
+        </div>
+
+        <div class="lines">
+          <div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div>
+          <div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div>
+          <div class="line"></div><div class="line"></div>
+        </div>
+
+        <div class="corr note warn" id="corrBlock">
+          <strong>Corrigé (mode enseignant)</strong><br/>
+          <pre id="corrText"></pre>
+        </div>
+
+        <div class="toolbar no-print" style="margin-top:12px;">
+          <div class="left">
+            <span class="chip" id="modeChip"></span>
+          </div>
+          <div class="right">
+            <button class="btn primary" onclick="window.print()">Imprimer / PDF</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>
+        © 2026 Eric MORMIN — Tous droits réservés · Édité par
+        <a href="https://www.ekmconseils.eu" target="_blank" rel="noopener">EKM Conseils (www.ekmconseils.eu)</a>
+      </div>
+      <div>
+        Ressource pédagogique réalisée pour La Salle Saint-Nicolas, Issy-les-Moulineaux ·
+        CAP Électricité · Bac Pro CIEL · Bac Pro MSPC · BTS CIEL
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const SHEETS = {
+      length: {
+        title: "Fiche papier — Longueurs",
+        sub: "Tableau SI (km → mm) + 10 exercices",
+        rule: "Longueurs : ×10 à chaque colonne.",
+        cols: ["km", "hm", "dam", "m", "dm", "cm", "mm"],
+        exercises: [
+          "2,5 m = …… cm",
+          "0,48 km = …… m",
+          "135 mm = …… cm",
+          "7,2 dm = …… mm",
+          "3,6 hm = …… m",
+          "0,09 m = …… mm",
+          "12,4 cm = …… m",
+          "1,05 km = …… dam",
+          "6800 mm = …… m",
+          "0,7 dam = …… cm"
+        ],
+        answers: [
+          "1) 250 cm",
+          "2) 480 m",
+          "3) 13,5 cm",
+          "4) 720 mm",
+          "5) 360 m",
+          "6) 90 mm",
+          "7) 0,124 m",
+          "8) 105 dam",
+          "9) 6,8 m",
+          "10) 700 cm"
+        ]
+      },
+      mass: {
+        title: "Fiche papier — Masses",
+        sub: "Tableau SI (t → mg) + 10 exercices",
+        rule: "Masses : ×10 à chaque colonne.",
+        cols: ["t", "kg", "hg", "dag", "g", "dg", "cg", "mg"],
+        exercises: [
+          "0,75 kg = …… g",
+          "2,4 t = …… kg",
+          "3500 mg = …… g",
+          "18 g = …… mg",
+          "6,2 hg = …… g",
+          "0,09 kg = …… mg",
+          "125 g = …… dag",
+          "4,5 dag = …… g",
+          "0,006 t = …… kg",
+          "980 cg = …… g"
+        ],
+        answers: [
+          "1) 750 g",
+          "2) 2400 kg",
+          "3) 3,5 g",
+          "4) 18000 mg",
+          "5) 620 g",
+          "6) 90000 mg",
+          "7) 12,5 dag",
+          "8) 45 g",
+          "9) 6 kg",
+          "10) 9,8 g"
+        ]
+      },
+      capacity: {
+        title: "Fiche papier — Capacités",
+        sub: "Litres (kL → mL) + 10 exercices",
+        rule: "Capacités : ×10 à chaque colonne. 1 L = 1 dm³ ; 1 mL = 1 cm³.",
+        cols: ["kL", "hL", "daL", "L", "dL", "cL", "mL"],
+        exercises: [
+          "2,5 L = …… mL",
+          "0,48 hL = …… L",
+          "750 mL = …… cL",
+          "3,6 daL = …… L",
+          "0,09 L = …… mL",
+          "12 cL = …… L",
+          "1,05 kL = …… L",
+          "6800 mL = …… L",
+          "0,7 L = …… cL",
+          "2,4 L = …… dL"
+        ],
+        answers: [
+          "1) 2500 mL",
+          "2) 48 L",
+          "3) 75 cL",
+          "4) 36 L",
+          "5) 90 mL",
+          "6) 0,12 L",
+          "7) 1050 L",
+          "8) 6,8 L",
+          "9) 70 cL",
+          "10) 24 dL"
+        ]
+      },
+      time: {
+        title: "Fiche papier — Temps",
+        sub: "Temps (h → min → s) + 10 exercices",
+        rule: "Temps : ×60 (h→min) puis ×60 (min→s).",
+        cols: ["h", "min", "s"],
+        exercises: [
+          "1,5 h = …… min",
+          "2 h = …… s",
+          "90 min = …… h",
+          "5400 s = …… h",
+          "45 min = …… s",
+          "360 s = …… min",
+          "2 h 30 min = …… min",
+          "1 h 12 min = …… s",
+          "0,25 h = …… s",
+          "7200 s = …… min"
+        ],
+        answers: [
+          "1) 90 min",
+          "2) 7200 s",
+          "3) 1,5 h",
+          "4) 1,5 h",
+          "5) 2700 s",
+          "6) 6 min",
+          "7) 150 min",
+          "8) 4320 s",
+          "9) 900 s",
+          "10) 120 min"
+        ]
+      },
+      area: {
+        title: "Fiche papier — Aires",
+        sub: "Aires (km² → mm²) + 10 exercices",
+        rule: "Aires : ×100 à chaque colonne (car unités au carré).",
+        cols: ["km²", "hm²", "dam²", "m²", "dm²", "cm²", "mm²"],
+        exercises: [
+          "3 m² = …… cm²",
+          "0,5 m² = …… dm²",
+          "1,2 km² = …… m²",
+          "2500 cm² = …… m²",
+          "0,08 dm² = …… cm²",
+          "7,5 m² = …… mm²",
+          "60000 mm² = …… cm²",
+          "0,04 hm² = …… m²",
+          "12 dm² = …… m²",
+          "2,5 cm² = …… mm²"
+        ],
+        answers: [
+          "1) 30000 cm²",
+          "2) 50 dm²",
+          "3) 1200000 m²",
+          "4) 0,25 m²",
+          "5) 8 cm²",
+          "6) 7500000 mm²",
+          "7) 600 cm²",
+          "8) 400 m²",
+          "9) 0,12 m²",
+          "10) 250 mm²"
+        ]
+      },
+      volume3: {
+        title: "Fiche papier — Volumes cubiques",
+        sub: "Volumes (m³ → mm³) + 10 exercices",
+        rule: "Volumes : ×1000 à chaque colonne (car unités au cube). 1 m³ = 1000 L.",
+        cols: ["m³", "dm³", "cm³", "mm³"],
+        exercises: [
+          "0,5 m³ = …… dm³",
+          "2 m³ = …… L",
+          "750 dm³ = …… m³",
+          "3,6 dm³ = …… cm³",
+          "1200000 mm³ = …… cm³",
+          "0,09 m³ = …… L",
+          "6800 cm³ = …… dm³",
+          "0,7 dm³ = …… mm³",
+          "2,4 cm³ = …… mm³",
+          "1,05 m³ = …… dm³"
+        ],
+        answers: [
+          "1) 500 dm³",
+          "2) 2000 L",
+          "3) 0,75 m³",
+          "4) 3600 cm³",
+          "5) 1200 cm³",
+          "6) 90 L",
+          "7) 6,8 dm³",
+          "8) 700000 mm³",
+          "9) 2400 mm³",
+          "10) 1050 dm³"
+        ]
+      },
+      electric: {
+        title: "Fiche papier — Électricité",
+        sub: "Conversions usuelles (kV/V, A/mA, kΩ/Ω, kW/W) + 10 exercices",
+        rule: "Électricité : k = ×1000 ; m = ÷1000 (selon la conversion).",
+        cols: ["kV", "V", "A", "mA", "kΩ", "Ω", "kW", "W"],
+        exercises: [
+          "1,2 kV = …… V",
+          "2300 V = …… kV",
+          "0,35 A = …… mA",
+          "120 mA = …… A",
+          "4,7 kΩ = …… Ω",
+          "680 Ω = …… kΩ",
+          "2,5 kW = …… W",
+          "75 W = …… kW",
+          "0,006 kV = …… V",
+          "1500 mA = …… A"
+        ],
+        answers: [
+          "1) 1200 V",
+          "2) 2,3 kV",
+          "3) 350 mA",
+          "4) 0,12 A",
+          "5) 4700 Ω",
+          "6) 0,68 kΩ",
+          "7) 2500 W",
+          "8) 0,075 kW",
+          "9) 6 V",
+          "10) 1,5 A"
+        ]
+      },
+      data: {
+        title: "Fiche papier — Numérique / Réseaux",
+        sub: "Bits, octets, Ko/Mo/Go/To + 10 exercices",
+        rule: "Numérique : 1 octet = 8 bits ; 1 Ko = 1024 o ; 1 Mo = 1024 Ko ; 1 Go = 1024 Mo ; 1 To = 1024 Go.",
+        cols: ["bits", "octets (o)", "Ko", "Mo", "Go", "To"],
+        exercises: [
+          "64 bits = …… octets",
+          "2048 octets = …… Ko",
+          "1 Ko = …… octets",
+          "1 Mo = …… Ko",
+          "2,5 Mo = …… Ko",
+          "1024 Ko = …… Mo",
+          "3 Go = …… Mo",
+          "1 To = …… Go",
+          "8000 octets = …… bits",
+          "0,5 Go = …… Mo"
+        ],
+        answers: [
+          "1) 8 octets",
+          "2) 2 Ko",
+          "3) 1024 octets",
+          "4) 1024 Ko",
+          "5) 2560 Ko",
+          "6) 1 Mo",
+          "7) 3072 Mo",
+          "8) 1024 Go",
+          "9) 64000 bits",
+          "10) 512 Mo"
+        ]
+      }
+    };
+
+    function getParam(name) {
+      const u = new URL(window.location.href);
+      return u.searchParams.get(name);
+    }
+
+    function setParam(name, value) {
+      const u = new URL(window.location.href);
+      u.searchParams.set(name, value);
+      window.location.href = u.toString();
+    }
+
+    function render(type) {
+      const sheet = SHEETS[type] || SHEETS.length;
+
+      document.getElementById("sheetTitle").textContent = sheet.title;
+      document.getElementById("sheetSub").textContent = sheet.sub;
+      document.getElementById("sheetRule").textContent = " " + sheet.rule;
+
+      // Build blank table
+      const table = document.getElementById("blankTable");
+      table.innerHTML = "";
+      const trHead = document.createElement("tr");
+      sheet.cols.forEach(c => {
+        const th = document.createElement("th");
+        th.textContent = c;
+        trHead.appendChild(th);
+      });
+      table.appendChild(trHead);
+
+      const trBlank = document.createElement("tr");
+      sheet.cols.forEach(() => {
+        const td = document.createElement("td");
+        td.innerHTML = "&nbsp;";
+        trBlank.appendChild(td);
+      });
+      table.appendChild(trBlank);
+
+      // Exercises
+      const exList = document.getElementById("exList");
+      exList.innerHTML = "";
+      sheet.exercises.forEach((ex, i) => {
+        const div = document.createElement("div");
+        div.className = "ex-item";
+        div.innerHTML = `<strong>${i+1}.</strong> ${ex}<br/><span class="smallnote">Réponse : ________________________________________________</span>`;
+        exList.appendChild(div);
+      });
+
+      // Teacher mode
+      const teacher = getParam("teacher") === "1";
+      const corrBlock = document.getElementById("corrBlock");
+      const corrText = document.getElementById("corrText");
+      const modeChip = document.getElementById("modeChip");
+
+      if (teacher) {
+        corrText.textContent = sheet.answers.join("\n");
+        corrBlock.style.display = "block";
+        modeChip.textContent = "Mode enseignant : corrigé affiché";
+      } else {
+        corrBlock.style.display = "none";
+        modeChip.textContent = "Mode élève : corrigé masqué";
+      }
+
+      // Sync select (if present)
+      const sel = document.getElementById("typeSelect");
+      if (sel) sel.value = type;
+    }
+
+    // Init
+    const initialType = getParam("type") || "length";
+    render(initialType);
+
+    // UI actions
+    const btnOpen = document.getElementById("btnOpen");
+    if (btnOpen) {
+      btnOpen.addEventListener("click", () => {
+        const t = document.getElementById("typeSelect").value;
+        setParam("type", t);
+      });
+    }
+  </script>
+</body>
+</html>
