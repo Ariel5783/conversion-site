@@ -3,18 +3,24 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Tableaux de conversion — Mode enseignant</title>
+
+  <title>Conversions &amp; Mesures — Mode enseignant</title>
+  <meta name="description" content="Mode enseignant : accès aux corrigés, générateur d’exercices avec corrigé affiché, exports JSON/CSV et suivi des productions. Ressource CAP Électricité, Bac Pro CIEL, Bac Pro MSPC, BTS CIEL.">
+
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body>
   <div class="wrap">
     <div class="topbar">
       <div class="brand">
-        <h1>Mode enseignant</h1>
-        <p>
-          Accès aux corrigés + générateur d’exercices (corrigé affiché). Exports JSON/CSV.
-          Pour afficher les corrections sur les pages élève : ajouter <b>?teacher=1</b> dans l’URL.
-        </p>
+        <h1>Conversions &amp; Mesures</h1>
+        <p>Mode enseignant – corrigés, générateur, exports (CAP · Bac Pro · BTS)</p>
+
+        <div class="note warn" style="margin-top:10px;">
+          <strong>Afficher les corrections sur les pages élèves</strong><br/>
+          Ajoutez <code>?teacher=1</code> à l’URL (ex. <code>exercices.html?teacher=1</code>).<br/>
+          Si l’URL contient déjà un <code>?</code>, utilisez <code>&amp;teacher=1</code>.
+        </div>
       </div>
 
       <nav class="nav no-print">
@@ -25,6 +31,21 @@
         <a href="enseignant.html" aria-current="page">Enseignant</a>
       </nav>
     </div>
+
+    <!-- Bloc d'introduction -->
+    <section class="card" id="teacher-intro" style="margin-bottom:14px;">
+      <div class="hd">
+        <h2>Mode enseignant</h2>
+        <p>Accès aux corrigés, générateur d’exercices (corrigé affiché) et exports JSON/CSV.</p>
+      </div>
+      <div class="bd">
+        <div class="note ok">
+          <strong>À retenir</strong><br/>
+          Les données (réponses, score, fiche élève) sont enregistrées <strong>localement</strong> sur l’appareil / navigateur utilisé.
+          Pour collecter les productions, utilisez les exports JSON/CSV ci-dessous.
+        </div>
+      </div>
+    </section>
 
     <div class="card">
       <div class="hd">
@@ -89,7 +110,7 @@
       </div>
       <div>
         Ressource pédagogique réalisée pour La Salle Saint-Nicolas, Issy-les-Moulineaux ·
-        CAP Electricité · Bac Pro CIEL · Bac Pro MSPC · BTS CIEL
+        CAP Électricité · Bac Pro CIEL · Bac Pro MSPC · BTS CIEL
       </div>
     </footer>
   </div>
